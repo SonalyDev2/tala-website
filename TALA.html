@@ -1,0 +1,1433 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>TALA AI Technologies - Building Africa's Future Through Intelligent Systems</title>
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+        :root {
+            --bg-primary: #020B1E;
+            --bg-secondary: #05142F;
+            --bg-gradient-start: #05142F;
+            --bg-gradient-end: #021024;
+            --accent-cyan: #1AF3FF;
+            --accent-blue: #3BC6FF;
+            --text-white: #EFFFFF;
+            --success-teal: #4BE3C9;
+            --warning-amber: #FFC857;
+            --error-red: #FF3B3B;
+        }
+
+        body {
+            font-family: 'Inter', -apple-system, BlinkMacSystemFont, 'Segoe UI', sans-serif;
+            background-color: var(--bg-primary);
+            color: var(--text-white);
+            line-height: 1.6;
+            overflow-x: hidden;
+        }
+
+        h1, h2, h3, h4, h5, h6 {
+            font-family: 'Montserrat', sans-serif;
+            font-weight: 700;
+            letter-spacing: 0.05em;
+        }
+
+        .container {
+            max-width: 1400px;
+            margin: 0 auto;
+            padding: 0 20px;
+        }
+
+        /* Navigation */
+        .nav {
+            position: fixed;
+            top: 0;
+            left: 0;
+            right: 0;
+            z-index: 1000;
+            background: rgba(2, 11, 30, 0.95);
+            backdrop-filter: blur(10px);
+            border-bottom: 1px solid rgba(26, 243, 255, 0.2);
+        }
+
+        .nav__container {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            padding: 20px;
+            max-width: 1400px;
+            margin: 0 auto;
+        }
+
+        .nav__logo {
+            font-size: 28px;
+            font-weight: 700;
+            color: var(--accent-cyan);
+            text-decoration: none;
+            text-transform: uppercase;
+            letter-spacing: 0.1em;
+            text-shadow: 0 0 20px rgba(26, 243, 255, 0.5);
+        }
+
+        .nav__menu {
+            display: flex;
+            list-style: none;
+            gap: 40px;
+            align-items: center;
+        }
+
+        .nav__link {
+            color: var(--text-white);
+            text-decoration: none;
+            font-weight: 500;
+            font-size: 14px;
+            text-transform: uppercase;
+            letter-spacing: 0.05em;
+            transition: all 0.3s ease;
+            position: relative;
+        }
+
+        .nav__link::after {
+            content: '';
+            position: absolute;
+            bottom: -5px;
+            left: 0;
+            width: 0;
+            height: 2px;
+            background: var(--accent-cyan);
+            transition: width 0.3s ease;
+        }
+
+        .nav__link:hover {
+            color: var(--accent-cyan);
+        }
+
+        .nav__link:hover::after {
+            width: 100%;
+        }
+
+        .nav__toggle {
+            display: none;
+            flex-direction: column;
+            gap: 5px;
+            cursor: pointer;
+        }
+
+        .nav__toggle span {
+            width: 25px;
+            height: 2px;
+            background: var(--accent-cyan);
+            transition: all 0.3s ease;
+        }
+
+        /* HERO SECTION – JARVIS ORB */
+        .hero {
+            min-height: 100vh;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            position: relative;
+            overflow: hidden;
+            padding-top: 80px;
+            background:
+                radial-gradient(circle at center, #021024 0%, #020814 45%, #020611 70%, #02040C 100%);
+        }
+
+        .hero::before {
+            content: '';
+            position: absolute;
+            inset: -20%;
+            background:
+                radial-gradient(circle at center,
+                    rgba(59, 198, 255, 0.05) 0%,
+                    transparent 55%)
+                , radial-gradient(circle at center,
+                    transparent 45%,
+                    rgba(0, 0, 0, 0.75) 100%);
+            pointer-events: none;
+            z-index: 0;
+        }
+
+        .hero__inner {
+            position: relative;
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            justify-content: center;
+            gap: 40px;
+            padding: 120px 20px 140px;
+            max-width: 1000px;
+            margin: 0 auto;
+            text-align: center;
+            z-index: 1;
+        }
+
+        .hero__visual {
+            position: relative;
+            width: min(720px, 92vw);
+            aspect-ratio: 1 / 1;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+        }
+
+        .hero__background {
+            position: absolute;
+            inset: 0;
+            pointer-events: none;
+            filter: drop-shadow(0 0 45px rgba(26, 243, 255, 0.35));
+        }
+
+        .hero__core {
+            position: relative;
+            width: 100%;
+            height: 100%;
+            animation: rotateCore 40s linear infinite;
+        }
+
+        .hero__core::before {
+            content: '';
+            position: absolute;
+            top: 50%;
+            left: 50%;
+            width: 220px;
+            height: 220px;
+            transform: translate(-50%, -50%);
+            border-radius: 50%;
+            background: radial-gradient(circle at center,
+                #FFEEC2 0%,
+                #FFC979 30%,
+                #FF9F46 55%,
+                #D5561B 72%,
+                transparent 84%
+            );
+            box-shadow:
+                0 0 55px rgba(255, 159, 70, 0.95),
+                0 0 140px rgba(255, 159, 70, 0.8),
+                0 0 220px rgba(255, 140, 40, 0.55);
+            animation:
+                corePulse 3.2s ease-in-out infinite,
+                coreGlow 6s ease-in-out infinite;
+        }
+
+        .hero__core::after {
+            content: '';
+            position: absolute;
+            top: 50%;
+            left: 50%;
+            width: 360px;
+            height: 360px;
+            transform: translate(-50%, -50%);
+            border-radius: 50%;
+            border: 2px solid rgba(26, 243, 255, 0.9);
+            box-shadow:
+                0 0 45px rgba(59, 198, 255, 0.9) inset,
+                0 0 85px rgba(26, 243, 255, 0.9),
+                0 0 160px rgba(26, 243, 255, 0.55);
+            backdrop-filter: blur(2px);
+        }
+
+        .hero__ring {
+            position: absolute;
+            border-radius: 50%;
+            border: 1px solid rgba(26, 243, 255, 0.35);
+            box-shadow: 0 0 30px rgba(26, 243, 255, 0.25);
+            opacity: 0.5;
+            mix-blend-mode: screen;
+        }
+
+        .hero__ring--outer {
+            top: 4%;
+            left: 4%;
+            right: 4%;
+            bottom: 4%;
+            border-width: 1.5px;
+            animation:
+                pulseRing 4s ease-in-out infinite,
+                ringRotateSlow 80s linear infinite;
+        }
+
+        .hero__ring--mid {
+            top: 18%;
+            left: 18%;
+            right: 18%;
+            bottom: 18%;
+            border-width: 1.5px;
+            animation:
+                pulseRing 4.8s ease-in-out infinite 0.6s,
+                ringRotateMedium 60s linear infinite;
+        }
+
+        .hero__ring--inner {
+            top: 30%;
+            left: 30%;
+            right: 30%;
+            bottom: 30%;
+            border-width: 2px;
+            animation:
+                pulseRing 5.4s ease-in-out infinite 1.2s,
+                ringRotateFast 40s linear infinite;
+        }
+
+        .hero__ring--halo {
+            top: -6%;
+            left: -6%;
+            right: -6%;
+            bottom: -6%;
+            border: none;
+            box-shadow:
+                0 0 85px rgba(26, 243, 255, 0.28),
+                0 0 200px rgba(26, 243, 255, 0.18);
+            opacity: 0.9;
+            animation: pulseRing 6s ease-in-out infinite 0.9s;
+        }
+
+        .hero__crosshair {
+            position: absolute;
+            top: 50%;
+            left: 50%;
+            pointer-events: none;
+            opacity: 0.75;
+        }
+
+        .hero__crosshair--horizontal {
+            width: 120%;
+            height: 1px;
+            transform: translate(-50%, -50%);
+            background: linear-gradient(
+                to right,
+                transparent 0%,
+                rgba(26, 243, 255, 0.08) 10%,
+                rgba(26, 243, 255, 0.9) 50%,
+                rgba(26, 243, 255, 0.08) 90%,
+                transparent 100%
+            );
+        }
+
+        .hero__crosshair--vertical {
+            width: 1px;
+            height: 120%;
+            transform: translate(-50%, -50%);
+            background: linear-gradient(
+                to bottom,
+                transparent 0%,
+                rgba(26, 243, 255, 0.08) 10%,
+                rgba(26, 243, 255, 0.9) 50%,
+                rgba(26, 243, 255, 0.08) 90%,
+                transparent 100%
+            );
+        }
+
+        @keyframes rotateCore {
+            from { transform: rotate(0deg); }
+            to { transform: rotate(360deg); }
+        }
+
+        @keyframes corePulse {
+            0%, 100% {
+                transform: translate(-50%, -50%) scale(1);
+                opacity: 1;
+            }
+            50% {
+                transform: translate(-50%, -50%) scale(1.06);
+                opacity: 0.92;
+            }
+        }
+
+        @keyframes coreGlow {
+            0%, 100% {
+                box-shadow:
+                    0 0 55px rgba(255, 159, 70, 0.95),
+                    0 0 140px rgba(255, 159, 70, 0.8),
+                    0 0 220px rgba(255, 140, 40, 0.55);
+            }
+            40% {
+                box-shadow:
+                    0 0 75px rgba(255, 180, 90, 1),
+                    0 0 175px rgba(255, 170, 80, 0.9),
+                    0 0 260px rgba(255, 150, 50, 0.7);
+            }
+            70% {
+                box-shadow:
+                    0 0 65px rgba(255, 155, 65, 0.98),
+                    0 0 160px rgba(255, 150, 60, 0.85),
+                    0 0 230px rgba(255, 135, 45, 0.6);
+            }
+        }
+
+        @keyframes pulseRing {
+            0%, 100% {
+                transform: scale(1);
+                opacity: 0.32;
+            }
+            50% {
+                transform: scale(1.06);
+                opacity: 0.86;
+            }
+        }
+
+        @keyframes ringRotateSlow {
+            from { transform: rotate(0deg); }
+            to { transform: rotate(360deg); }
+        }
+        @keyframes ringRotateMedium {
+            from { transform: rotate(0deg); }
+            to { transform: rotate(-360deg); }
+        }
+        @keyframes ringRotateFast {
+            from { transform: rotate(0deg); }
+            to { transform: rotate(540deg); }
+        }
+
+        .hero__content {
+            position: absolute;
+            top: 50%;
+            left: 50%;
+            transform: translate(-50%, -50%);
+            z-index: 10;
+            max-width: 80%;
+            text-align: center;
+        }
+
+        .hero__title {
+            font-size: clamp(32px, 4.2vw, 56px);
+            margin-bottom: 10px;
+            text-transform: uppercase;
+            line-height: 1.2;
+            color: #FFFFFF;
+            text-shadow:
+                0 0 18px rgba(0, 0, 0, 0.9),
+                0 0 30px rgba(26, 243, 255, 0.55);
+        }
+
+        .hero__meta {
+            position: relative;
+            z-index: 10;
+            max-width: 900px;
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            gap: 30px;
+            margin-top: 80px;
+        }
+
+        .hero__subtitle {
+            font-size: clamp(16px, 2vw, 22px);
+            color: var(--accent-blue);
+            font-weight: 300;
+        }
+
+        .hero__cta {
+            display: flex;
+            gap: 20px;
+            justify-content: center;
+            flex-wrap: wrap;
+        }
+
+        .btn {
+            padding: 16px 40px;
+            font-size: 14px;
+            font-weight: 600;
+            text-transform: uppercase;
+            letter-spacing: 0.1em;
+            border: none;
+            cursor: pointer;
+            transition: all 0.3s ease;
+            text-decoration: none;
+            display: inline-block;
+            border-radius: 4px;
+        }
+
+        .btn--primary {
+            background: linear-gradient(135deg, var(--accent-blue), var(--accent-cyan));
+            color: var(--bg-primary);
+            box-shadow: 0 0 30px rgba(26, 243, 255, 0.4);
+        }
+
+        .btn--primary:hover {
+            box-shadow: 0 0 50px rgba(26, 243, 255, 0.7);
+            transform: translateY(-2px);
+        }
+
+        .btn--secondary {
+            background: transparent;
+            color: var(--accent-cyan);
+            border: 2px solid var(--accent-cyan);
+        }
+
+        .btn--secondary:hover {
+            background: rgba(26, 243, 255, 0.1);
+            box-shadow: 0 0 30px rgba(26, 243, 255, 0.3);
+        }
+
+        .section {
+            padding: 90px 0;
+            position: relative;
+        }
+
+        .section__title {
+            font-size: clamp(32px, 4vw, 48px);
+            text-align: center;
+            margin-bottom: 60px;
+            text-transform: uppercase;
+            color: var(--accent-cyan);
+        }
+
+        .section__subtitle {
+            text-align: center;
+            font-size: 18px;
+            color: var(--accent-blue);
+            margin-bottom: 60px;
+            max-width: 800px;
+            margin-left: auto;
+            margin-right: auto;
+        }
+
+        .intro {
+            background: linear-gradient(180deg, var(--bg-primary) 0%, var(--bg-secondary) 100%);
+        }
+
+        .intro__grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
+            gap: 40px;
+            max-width: 1200px;
+            margin: 0 auto;
+        }
+
+        .intro__card {
+            background: linear-gradient(135deg, var(--bg-gradient-start), var(--bg-gradient-end));
+            padding: 40px;
+            border-radius: 8px;
+            border: 1px solid rgba(26, 243, 255, 0.2);
+            transition: all 0.3s ease;
+        }
+
+        .intro__card:hover {
+            border-color: var(--accent-cyan);
+            box-shadow: 0 0 40px rgba(26, 243, 255, 0.2);
+            transform: translateY(-5px);
+        }
+
+        .intro__icon {
+            width: 60px;
+            height: 60px;
+            margin-bottom: 20px;
+            border: 2px solid var(--accent-cyan);
+            border-radius: 50%;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            font-size: 28px;
+            color: var(--accent-cyan);
+        }
+
+        .intro__text {
+            font-size: 16px;
+            line-height: 1.8;
+            color: rgba(239, 255, 255, 0.9);
+        }
+
+        .products {
+            background: var(--bg-primary);
+        }
+
+        .products__grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(400px, 1fr));
+            gap: 50px;
+            max-width: 1200px;
+            margin: 0 auto;
+        }
+
+        .product-card {
+            background: linear-gradient(135deg, var(--bg-gradient-start), var(--bg-gradient-end));
+            border: 2px solid rgba(26, 243, 255, 0.3);
+            border-radius: 12px;
+            padding: 50px;
+            position: relative;
+            overflow: hidden;
+            transition: all 0.4s ease;
+        }
+
+        .product-card::before {
+            content: '';
+            position: absolute;
+            top: 0;
+            left: 0;
+            right: 0;
+            height: 4px;
+            background: linear-gradient(90deg, var(--accent-cyan), var(--accent-blue));
+            transform: scaleX(0);
+            transition: transform 0.4s ease;
+        }
+
+        .product-card:hover {
+            border-color: var(--accent-cyan);
+            box-shadow: 0 0 60px rgba(26, 243, 255, 0.3);
+            transform: translateY(-10px);
+        }
+
+        .product-card:hover::before {
+            transform: scaleX(1);
+        }
+
+        .product-card__title {
+            font-size: 28px;
+            margin-bottom: 20px;
+            color: var(--accent-cyan);
+            text-transform: uppercase;
+        }
+
+        .product-card__description {
+            font-size: 18px;
+            line-height: 1.8;
+            color: rgba(239, 255, 255, 0.8);
+        }
+
+        .partnerships {
+            background: linear-gradient(180deg, var(--bg-primary) 0%, var(--bg-secondary) 100%);
+            padding: 90px 0;
+        }
+
+        .partnerships__grid {
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            flex-wrap: wrap;
+            gap: 60px;
+        }
+
+        .partnership-logo {
+            padding: 30px 50px;
+            background: rgba(5, 20, 47, 0.5);
+            border: 1px solid rgba(26, 243, 255, 0.2);
+            border-radius: 8px;
+            transition: all 0.3s ease;
+        }
+
+        .partnership-logo:hover {
+            border-color: var(--accent-cyan);
+            box-shadow: 0 0 40px rgba(26, 243, 255, 0.2);
+        }
+
+        .partnership-logo__text {
+            font-size: 24px;
+            font-weight: 600;
+            color: var(--accent-cyan);
+            text-transform: uppercase;
+            letter-spacing: 0.1em;
+        }
+
+        /* ABOUT PAGE */
+
+        .about-hero {
+            padding: 150px 0 40px; /* smaller bottom padding */
+            text-align: center;
+        }
+
+        .about-hero__title {
+            font-size: clamp(36px, 5vw, 56px);
+            margin-bottom: 30px;
+            text-transform: uppercase;
+            color: var(--accent-cyan);
+        }
+
+        .about-hero__logo-wrapper {
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            margin: 10px auto 0;
+        }
+
+        .about-logo {
+            display: block;
+            width: clamp(220px, 28vw, 360px);
+            max-width: 100%;
+            height: auto;
+            border-radius: 26px;
+            margin: 20px auto 0;
+            box-shadow:
+                0 0 25px rgba(26, 243, 255, 0.35),
+                0 0 55px rgba(2, 11, 30, 0.75);
+        }
+
+        /* BIGGER + CLOSER SLOGAN */
+        .about-slogan {
+            margin-top: 16px;
+            margin-bottom: 16px;    /* pulls the next section up */
+            font-size: 22px;        /* noticeably bigger */
+            text-align: center;
+            color: var(--accent-cyan);
+            font-weight: 600;
+            letter-spacing: 0.1em;
+            text-transform: uppercase;
+            text-shadow: 0 0 20px rgba(26, 243, 255, 0.6);
+        }
+
+        /* reduce top padding ONLY for the first section after the logo */
+        .about-hero + .section {
+            padding-top: 40px;      /* was 90px, so gap is much smaller */
+        }
+
+        .content-block {
+            max-width: 900px;
+            margin: 0 auto 80px;
+        }
+
+        .content-block__title {
+            font-size: 36px;
+            margin-bottom: 25px;
+            color: var(--accent-cyan);
+            text-transform: uppercase;
+        }
+
+        .content-block__text {
+            font-size: 18px;
+            line-height: 1.9;
+            color: rgba(239, 255, 255, 0.9);
+            margin-bottom: 20px;
+        }
+
+        .content-block__list {
+            font-size: 18px;
+            line-height: 1.9;
+            color: rgba(239, 255, 255, 0.9);
+            margin-left: 20px;
+            list-style: disc;
+        }
+
+        .values {
+            background: linear-gradient(180deg, var(--bg-secondary) 0%, var(--bg-primary) 100%);
+            padding: 90px 0;
+        }
+
+        .values__grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(280px, 1fr));
+            gap: 40px;
+            max-width: 1200px;
+            margin: 0 auto;
+        }
+
+        .value-card {
+            text-align: center;
+            padding: 40px 30px;
+            background: rgba(5, 20, 47, 0.5);
+            border: 1px solid rgba(26, 243, 255, 0.2);
+            border-radius: 8px;
+            transition: all 0.3s ease;
+        }
+
+        .value-card:hover {
+            border-color: var(--accent-cyan);
+            box-shadow: 0 0 40px rgba(26, 243, 255, 0.2);
+            transform: translateY(-5px);
+        }
+
+        .value-card__icon {
+            width: 80px;
+            height: 80px;
+            margin: 0 auto 25px;
+            border: 2px solid var(--accent-cyan);
+            border-radius: 50%;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            font-size: 36px;
+            color: var(--accent-cyan);
+        }
+
+        .value-card__title {
+            font-size: 22px;
+            margin-bottom: 15px;
+            color: var(--accent-cyan);
+        }
+
+        .value-card__text {
+            font-size: 15px;
+            line-height: 1.7;
+            color: rgba(239, 255, 255, 0.8);
+        }
+
+        /* Contact Page */
+        .contact {
+            padding: 150px 0 90px;
+        }
+
+        .contact__container {
+            max-width: 1100px;
+            margin: 0 auto;
+        }
+
+        .contact__header {
+            text-align: center;
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+        }
+
+        .contact__header .about-hero__title,
+        .contact__header .section__subtitle {
+            width: 100%;
+            max-width: 900px;
+            margin-left: auto;
+            margin-right: auto;
+        }
+
+        .contact__grid {
+            display: grid;
+            grid-template-columns: 1.5fr 1fr;
+            gap: 80px;
+            margin-top: 60px;
+        }
+
+        .contact-form {
+            background: linear-gradient(135deg, var(--bg-gradient-start), var(--bg-gradient-end));
+            padding: 50px;
+            border: 1px solid rgba(26, 243, 255, 0.2);
+            border-radius: 8px;
+            width: 100%;
+        }
+
+        .form-group {
+            margin-bottom: 30px;
+        }
+
+        .form-group label {
+            display: block;
+            margin-bottom: 10px;
+            font-size: 14px;
+            text-transform: uppercase;
+            letter-spacing: 0.05em;
+            color: var(--accent-cyan);
+        }
+
+        .form-group input,
+        .form-group textarea {
+            width: 100%;
+            padding: 15px;
+            background: rgba(2, 11, 30, 0.8);
+            border: 1px solid rgba(26, 243, 255, 0.3);
+            border-radius: 4px;
+            color: var(--text-white);
+            font-size: 16px;
+            font-family: 'Inter', sans-serif;
+            transition: all 0.3s ease;
+        }
+
+        .form-group input:focus,
+        .form-group textarea:focus {
+            outline: none;
+            border-color: var(--accent-cyan);
+            box-shadow: 0 0 20px rgba(26, 243, 255, 0.2);
+        }
+
+        .form-group textarea {
+            resize: vertical;
+            min-height: 150px;
+        }
+
+        .contact-info {
+            padding: 50px 0 50px 10px;
+        }
+
+        .contact-info__title {
+            font-size: 28px;
+            margin-bottom: 30px;
+            color: var(--accent-cyan);
+        }
+
+        .contact-info__item {
+            margin-bottom: 24px;
+        }
+
+        .contact-info__label {
+            font-size: 14px;
+            text-transform: uppercase;
+            letter-spacing: 0.05em;
+            color: var(--accent-blue);
+            margin-bottom: 8px;
+        }
+
+        .contact-info__text {
+            font-size: 18px;
+            color: var(--text-white);
+        }
+
+        .contact-info__text a {
+            color: var(--text-white);
+            text-decoration: none;
+            transition: all 0.3s ease;
+        }
+
+        .contact-info__text a:hover {
+            color: var(--accent-cyan);
+            text-shadow: 0 0 10px rgba(26, 243, 255, 0.5);
+        }
+
+        /* Footer */
+        .footer {
+            background: var(--bg-secondary);
+            padding: 60px 0 30px;
+            border-top: 1px solid rgba(26, 243, 255, 0.2);
+        }
+
+        .footer__container {
+            max-width: 1400px;
+            margin: 0 auto;
+            padding: 0 20px;
+        }
+
+        .footer__grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
+            gap: 50px;
+            margin-bottom: 40px;
+        }
+
+        .footer__section-title {
+            font-size: 18px;
+            margin-bottom: 20px;
+            color: var(--accent-cyan);
+            text-transform: uppercase;
+        }
+
+        .footer__links {
+            list-style: none;
+        }
+
+        .footer__link {
+            margin-bottom: 12px;
+        }
+
+        .footer__link a {
+            color: rgba(239, 255, 255, 0.8);
+            text-decoration: none;
+            font-size: 15px;
+            transition: all 0.3s ease;
+        }
+
+        .footer__link a:hover {
+            color: var(--accent-cyan);
+        }
+
+        .footer__text {
+            font-size: 15px;
+            line-height: 1.8;
+            color: rgba(239, 255, 255, 0.8);
+        }
+
+        .footer__text a {
+            color: var(--text-white);
+            text-decoration: none;
+            transition: all 0.3s ease;
+        }
+
+        .footer__text a:hover {
+            color: var(--accent-cyan);
+        }
+
+        .footer__bottom {
+            text-align: center;
+            padding-top: 30px;
+            border-top: 1px solid rgba(26, 243, 255, 0.1);
+            color: rgba(239, 255, 255, 0.6);
+            font-size: 14px;
+        }
+
+        .page-indicator {
+            display: none;
+        }
+
+        body[data-page="home"] .page-indicator[data-page="home"],
+        body[data-page="about"] .page-indicator[data-page="about"],
+        body[data-page="contact"] .page-indicator[data-page="contact"] {
+            display: block;
+        }
+
+        @media (max-width: 768px) {
+            .nav__menu {
+                position: fixed;
+                top: 70px;
+                left: -100%;
+                flex-direction: column;
+                background: rgba(2, 11, 30, 0.98);
+                width: 100%;
+                padding: 40px 20px;
+                transition: left 0.3s ease;
+                border-bottom: 1px solid rgba(26, 243, 255, 0.2);
+            }
+
+            .nav__menu.active {
+                left: 0;
+            }
+
+            .nav__toggle {
+                display: flex;
+            }
+
+            .hero__inner {
+                padding: 120px 20px 120px;
+                gap: 32px;
+            }
+
+            .hero__visual {
+                width: min(420px, 90vw);
+            }
+
+            .products__grid {
+                grid-template-columns: 1fr;
+            }
+
+            .contact__grid {
+                grid-template-columns: 1fr;
+            }
+
+            .footer__grid {
+                grid-template-columns: 1fr;
+            }
+
+            .contact-info {
+                padding-left: 0;
+            }
+        }
+
+        @media (max-width: 480px) {
+            .hero__visual {
+                width: min(320px, 90vw);
+            }
+
+            .hero__content {
+                max-width: 88%;
+            }
+
+            .btn {
+                padding: 14px 30px;
+                font-size: 12px;
+            }
+
+            .section {
+                padding: 60px 0;
+            }
+
+            .intro__grid {
+                grid-template-columns: 1fr;
+            }
+
+            .values__grid {
+                grid-template-columns: 1fr;
+            }
+        }
+    </style>
+</head>
+<body data-page="home">
+    <nav class="nav">
+        <div class="nav__container">
+            <a href="#home" class="nav__logo">TALA</a>
+            <div class="nav__toggle" onclick="toggleMenu()">
+                <span></span>
+                <span></span>
+                <span></span>
+            </div>
+            <ul class="nav__menu" id="navMenu">
+                <li><a href="#home" class="nav__link">Home</a></li>
+                <li><a href="#about" class="nav__link">About Us</a></li>
+                <li><a href="#contact" class="nav__link">Contact</a></li>
+            </ul>
+        </div>
+    </nav>
+
+    <div class="page-indicator" data-page="home">
+        <section class="hero" id="home">
+            <div class="hero__inner">
+                <div class="hero__visual">
+                    <div class="hero__background">
+                        <div class="hero__core">
+                            <div class="hero__ring hero__ring--halo"></div>
+                            <div class="hero__ring hero__ring--outer"></div>
+                            <div class="hero__ring hero__ring--mid"></div>
+                            <div class="hero__ring hero__ring--inner"></div>
+                            <div class="hero__crosshair hero__crosshair--horizontal"></div>
+                            <div class="hero__crosshair hero__crosshair--vertical"></div>
+                        </div>
+                    </div>
+                    <div class="hero__content">
+                        <h1 class="hero__title">
+                            Intelligent Compliance. Accessible Funding. Delivered Seamlessly.
+                        </h1>
+                    </div>
+                </div>
+
+                <div class="hero__meta">
+                    <p class="hero__subtitle">
+                        TALA AI, your guiding light through compliance and funding.
+                    </p>
+                    <div class="hero__cta">
+                        <a href="#contact" class="btn btn--primary">Request Our Pitch Deck</a>
+                        <a href="#about" class="btn btn--secondary">Explore TALA AI</a>
+                    </div>
+                </div>
+            </div>
+        </section>
+
+        <section class="section intro">
+            <div class="container">
+                <h2 class="section__title">Who We Are</h2>
+                <div class="intro__grid">
+                    <div class="intro__card">
+                        <div class="intro__icon">◉</div>
+                        <p class="intro__text">TALA AI Technologies (Pty) Ltd is a South African technology company pioneering the future of compliance and funding access through artificial intelligence.</p>
+                    </div>
+                    <div class="intro__card">
+                        <div class="intro__icon">◈</div>
+                        <p class="intro__text">We are building the country's first AI-driven compliance and funding platform — a multilingual system designed to simplify complex regulatory processes.</p>
+                    </div>
+                    <div class="intro__card">
+                        <div class="intro__icon">◊</div>
+                        <p class="intro__text">TALA integrates AI-powered guidance, automated documentation, risk scoring, and a national funding gateway to create a seamless pathway from compliance to capital.</p>
+                    </div>
+                </div>
+            </div>
+        </section>
+
+        <section class="section products">
+            <div class="container">
+                <h2 class="section__title">Our AI Products</h2>
+                <div class="products__grid">
+                    <div class="product-card">
+                        <h3 class="product-card__title">TALA AI Agent</h3>
+                        <p class="product-card__description">Your intelligent compliance & advisory assistant, powered by real legislation.</p>
+                    </div>
+                    <div class="product-card">
+                        <h3 class="product-card__title">TALA Funding Gateway</h3>
+                        <p class="product-card__description">A fully automated funding-readiness platform for SMEs & NGOs.</p>
+                    </div>
+                </div>
+            </div>
+        </section>
+
+        <section class="partnerships">
+            <div class="container">
+                <h2 class="section__title">Our Ecosystem</h2>
+                <div class="partnerships__grid">
+                    <div class="partnership-logo">
+                        <div class="partnership-logo__text">Fempreneurs Collective</div>
+                    </div>
+                </div>
+            </div>
+        </section>
+    </div>
+
+    <div class="page-indicator" data-page="about">
+        <section class="about-hero" id="about">
+            <div class="container">
+                <h1 class="about-hero__title">The Future of Compliance and Funding Starts Here.</h1>
+
+                <div class="about-hero__logo-wrapper">
+                    <img
+                        src="./assets/images/tala-logo.png"
+                        alt="TALA AI Technologies logo"
+                        class="about-logo"
+                        loading="lazy"
+                    />
+                </div>
+
+                <p class="about-slogan">
+                    TALA AI, your guiding light through compliance and funding.
+                </p>
+            </div>
+        </section>
+
+        <section class="section">
+            <div class="container">
+                <div class="content-block">
+                    <h2 class="content-block__title">About TALA AI Technologies</h2>
+                    <p class="content-block__text">
+                        TALA AI Technologies (Pty) Ltd is a South African technology company pioneering the future of compliance and funding access through artificial intelligence. We are building the country’s first AI-driven compliance and funding platform — a multilingual system designed to simplify complex regulatory processes and unlock opportunities for millions of SMEs, NGOs, startups, and women-owned businesses.
+                    </p>
+                    <p class="content-block__text">
+                        With deep expertise in finance, compliance, technology, legal frameworks, and enterprise development, our team is redefining how entrepreneurs access information, prepare compliant documents, and apply for funding. TALA integrates AI-powered guidance, automated documentation, risk scoring, and a national funding gateway to create a seamless pathway from compliance to capital.
+                    </p>
+                    <p class="content-block__text">
+                        We are committed to technology that drives economic transformation, strengthens governance, and empowers entrepreneurs across Africa.
+                    </p>
+                </div>
+
+                <div class="content-block">
+                    <h2 class="content-block__title">Our Mission</h2>
+                    <p class="content-block__text">
+                        To build South Africa's leading AI-powered compliance and funding platform that simplifies regulatory processes, strengthens governance, and unlocks equitable access to capital for SMEs, NGOs, startups, and women-owned businesses.
+                    </p>
+                </div>
+
+                <div class="content-block">
+                    <h2 class="content-block__title">Our Vision</h2>
+                    <p class="content-block__text">
+                        To create a future where every entrepreneur — regardless of background, education, or location has access to intelligent tools that enable compliance, funding readiness, growth, and long-term economic sustainability across Africa and beyond.
+                    </p>
+                </div>
+
+                <div class="content-block">
+                    <h2 class="content-block__title">Why TALA Exists</h2>
+                    <p class="content-block__text">
+                        TALA exists to solve one of South Africa's biggest economic challenges: the gap between entrepreneurs and the systems designed to support them. For far too long, South African SMEs, NGOs, and women-owned businesses have been held back by complicated compliance systems, unaffordable consultancy fees, and inaccessible funding pathways.
+                    </p>
+                    <p class="content-block__text">
+                        We built TALA as a digital partner — a multilingual AI system that guides entrepreneurs step-by-step through compliance, documentation, and funding readiness. It brings clarity where there was confusion, confidence where there was fear, and opportunity where there were previously locked doors.
+                    </p>
+                </div>
+
+                <div class="content-block">
+                    <h2 class="content-block__title">What We Build</h2>
+                    <p class="content-block__text">
+                        TALA Technologies is a pioneering South African AI company creating advanced regulatory and funding intelligence platforms. Our technology transforms complex legislation into real-time, automated guidance helping organisations stay compliant, secure funding, and scale sustainably.
+                    </p>
+                    <ul class="content-block__list">
+                        <li><strong>TALA AI Agent</strong> – Your always-on AI compliance advisor, capable of interpreting legislation, advising on regulatory steps, and guiding organisations across multiple industries.</li>
+                        <li><strong>TALA Funding Gateway</strong> – A fully automated platform for funding readiness, documentation generation, compliance checks, and investor submissions.</li>
+                    </ul>
+                </div>
+
+                <div class="content-block">
+                    <h2 class="content-block__title">Our Impact</h2>
+                    <p class="content-block__text">
+                        We exist to make compliance understandable, funding accessible, and growth achievable. Our work focuses on empowering women, youth, and underserved entrepreneurs; strengthening the economic fabric of South Africa; and building the AI infrastructure that will support Africa’s next wave of innovation and inclusive growth.
+                    </p>
+                    <p class="content-block__text">
+                        In one sentence: TALA was created to help entrepreneurs succeed by replacing confusion with clarity, complexity with simplicity, and obstacles with opportunity.
+                    </p>
+                </div>
+            </div>
+        </section>
+
+        <section class="values">
+            <div class="container">
+                <h2 class="section__title">Our Values</h2>
+                <div class="values__grid">
+                    <div class="value-card">
+                        <div class="value-card__icon">⬡</div>
+                        <h3 class="value-card__title">Integrity</h3>
+                        <p class="value-card__text">We operate with transparency, responsibility, and ethical commitment to every user.</p>
+                    </div>
+                    <div class="value-card">
+                        <div class="value-card__icon">⬢</div>
+                        <h3 class="value-card__title">Accessibility</h3>
+                        <p class="value-card__text">We design technology that is multilingual, inclusive, and built for real people and real businesses.</p>
+                    </div>
+                    <div class="value-card">
+                        <div class="value-card__icon">⬣</div>
+                        <h3 class="value-card__title">Innovation</h3>
+                        <p class="value-card__text">We leverage AI and cutting-edge tech to solve problems previously considered “too complex.”</p>
+                    </div>
+                    <div class="value-card">
+                        <div class="value-card__icon">⬤</div>
+                        <h3 class="value-card__title">Empowerment</h3>
+                        <p class="value-card__text">We uplift women, youth, and underserved entrepreneurs through knowledge, tools, and opportunity.</p>
+                    </div>
+                    <div class="value-card">
+                        <div class="value-card__icon">⬥</div>
+                        <h3 class="value-card__title">Excellence</h3>
+                        <p class="value-card__text">We hold ourselves to the highest standards in regulatory accuracy, data quality, and system performance.</p>
+                    </div>
+                    <div class="value-card">
+                        <div class="value-card__icon">⬦</div>
+                        <h3 class="value-card__title">Impact</h3>
+                        <p class="value-card__text">We build technology that drives national transformation and strengthens the economic fabric of South Africa.</p>
+                    </div>
+                </div>
+            </div>
+        </section>
+    </div>
+
+    <div class="page-indicator" data-page="contact">
+        <section class="contact" id="contact">
+            <div class="container contact__container">
+                <div class="contact__header">
+                    <h1 class="about-hero__title">Contact Us</h1>
+                    <p class="section__subtitle">Get in touch with TALA Technologies to learn more about our AI-driven solutions</p>
+                </div>
+
+                <div class="contact__grid">
+                    <div class="contact-form">
+                        <form action="https://formsubmit.co/support@talaai.co.za" method="POST">
+                            <input type="hidden" name="_captcha" value="false">
+                            <input type="hidden" name="_template" value="box">
+                            <input type="hidden" name="_subject" value="New Message from TALA AI Website">
+
+                            <div class="form-group">
+                                <label for="name">Full Name</label>
+                                <input type="text" id="name" name="name" required>
+                            </div>
+                            <div class="form-group">
+                                <label for="email">Email Address</label>
+                                <input type="email" id="email" name="email" required>
+                            </div>
+                            <div class="form-group">
+                                <label for="company">Company / Organization</label>
+                                <input type="text" id="company" name="company">
+                            </div>
+                            <div class="form-group">
+                                <label for="message">Message</label>
+                                <textarea id="message" name="message" required></textarea>
+                            </div>
+                            <button type="submit" class="btn btn--primary">Send Message</button>
+                        </form>
+                    </div>
+                    
+                    <div class="contact-info">
+                        <h3 class="contact-info__title">Company Details</h3>
+                        
+                        <div class="contact-info__item">
+                            <div class="contact-info__label">Contact Number</div>
+                            <div class="contact-info__text">
+                                031 020 1990
+                            </div>
+                        </div>
+
+                        <div class="contact-info__item">
+                            <div class="contact-info__label">Email</div>
+                            <div class="contact-info__text">
+                                <a href="mailto:support@talaai.co.za">support@talaai.co.za</a>
+                            </div>
+                        </div>
+                        
+                        <div class="contact-info__item">
+                            <div class="contact-info__label">LinkedIn</div>
+                            <div class="contact-info__text">
+                                <a href="#" target="_blank">TALA AI Technologies</a>
+                            </div>
+                        </div>
+
+                        <div class="contact-info__item">
+                            <div class="contact-info__label">Instagram</div>
+                            <div class="contact-info__text">
+                                <a href="#" target="_blank">tala_ai_tech</a>
+                            </div>
+                        </div>
+                        
+                        <div class="contact-info__item">
+                            <div class="contact-info__label">Website</div>
+                            <div class="contact-info__text">
+                                <a href="https://talaai.co.za" target="_blank">talaai.co.za</a>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </section>
+    </div>
+
+    <footer class="footer">
+        <div class="footer__container">
+            <div class="footer__grid">
+                <div>
+                    <h4 class="footer__section-title">TALA Technologies</h4>
+                    <p class="footer__text">Building intelligent systems that power Africa's next wave of innovation through AI-driven compliance and funding technology.</p>
+                </div>
+                
+                <div>
+                    <h4 class="footer__section-title">Quick Links</h4>
+                    <ul class="footer__links">
+                        <li class="footer__link"><a href="#home">Home</a></li>
+                        <li class="footer__link"><a href="#about">About Us</a></li>
+                        <li class="footer__link"><a href="#contact">Contact</a></li>
+                    </ul>
+                </div>
+                
+                <div>
+                    <h4 class="footer__section-title">Products</h4>
+                    <ul class="footer__links">
+                        <li class="footer__link"><a href="#home">TALA AI Agent</a></li>
+                        <li class="footer__link"><a href="#home">TALA Funding Gateway</a></li>
+                    </ul>
+                </div>
+                
+                <div>
+                    <h4 class="footer__section-title">Contact</h4>
+                    <p class="footer__text">
+                        Email: <a href="mailto:support@talaai.co.za">support@talaai.co.za</a><br>
+                        Durban, South Africa
+                    </p>
+                </div>
+            </div>
+            
+            <div class="footer__bottom">
+                <p>&copy; 2025 TALA AI Technologies (Pty) Ltd. All rights reserved.</p>
+            </div>
+        </div>
+    </footer>
+
+    <script>
+        function toggleMenu() {
+            const menu = document.getElementById('navMenu');
+            menu.classList.toggle('active');
+        }
+
+        const navLinks = document.querySelectorAll('.nav__link');
+        const body = document.body;
+
+        navLinks.forEach(link => {
+            link.addEventListener('click', function(e) {
+                e.preventDefault();
+                const targetId = this.getAttribute('href').substring(1);
+                
+                if (targetId === 'home') {
+                    body.setAttribute('data-page', 'home');
+                } else if (targetId === 'about') {
+                    body.setAttribute('data-page', 'about');
+                } else if (targetId === 'contact') {
+                    body.setAttribute('data-page', 'contact');
+                }
+                
+                window.scrollTo({ top: 0, behavior: 'smooth' });
+                
+                const menu = document.getElementById('navMenu');
+                menu.classList.remove('active');
+                
+                navLinks.forEach(l => l.classList.remove('active'));
+                this.classList.add('active');
+            });
+        });
+
+        document.addEventListener('click', function(event) {
+            const nav = document.querySelector('.nav');
+            const menu = document.getElementById('navMenu');
+            
+            if (!nav.contains(event.target) && menu.classList.contains('active')) {
+                menu.classList.remove('active');
+            }
+        });
+
+        document.querySelectorAll('a[href^="#"]').forEach(anchor => {
+            anchor.addEventListener('click', function (e) {
+                const href = this.getAttribute('href');
+                if (href !== '#home' && href !== '#about' && href !== '#contact') {
+                    e.preventDefault();
+                    const target = document.querySelector(href);
+                    if (target) {
+                        target.scrollIntoView({
+                            behavior: 'smooth'
+                        });
+                    }
+                }
+            });
+        });
+
+        window.addEventListener('load', function() {
+            document.body.style.opacity = '0';
+            setTimeout(function() {
+                document.body.style.transition = 'opacity 0.5s ease';
+                document.body.style.opacity = '1';
+            }, 100);
+        });
+    </script>
+</body>
+</html>
+
