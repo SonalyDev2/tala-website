@@ -1251,13 +1251,8 @@
 
                 <div class="contact__grid">
                     <div class="contact-form">
-                        <!-- FORM WIRED TO secure FormSubmit endpoint -->
-                        <form action="https://formsubmit.co/oc0c4cea33c3e6bc783336d3f61a59944" method="POST">
-                            <!-- FormSubmit options -->
-                            <input type="hidden" name="_captcha" value="false">
-                            <input type="hidden" name="_template" value="box">
-                            <input type="hidden" name="_subject" value="New Message from TALA AI Website">
-
+                        <!-- FORM sending data to Cloudflare /contact endpoint -->
+                        <form method="POST" action="/contact">
                             <div class="form-group">
                                 <label for="name">Full Name</label>
                                 <input type="text" id="name" name="name" required>
